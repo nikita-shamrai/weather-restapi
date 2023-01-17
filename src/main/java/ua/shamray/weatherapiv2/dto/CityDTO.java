@@ -20,8 +20,6 @@ public class CityDTO {
     String name;
     Double lat;
     Double lon;
-    List<Weather> weatherList = new ArrayList<>();
-
     public Long getId() {
         return id;
     }
@@ -54,11 +52,4 @@ public class CityDTO {
         this.lon = lon;
     }
 
-    public List<Weather> getWeatherList() {
-        return weatherList;
-    }
-
-    public void setWeatherList(List<Weather> weatherList) {
-        this.weatherList = weatherList;
-    }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class City {
     Double lat;
     Double lon;
     @OneToMany(mappedBy = "city")
-    List<Weather> weatherList;
+    List<Weather> weatherList = new ArrayList<>();
 
     public Long getId() {
         return id;

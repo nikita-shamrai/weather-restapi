@@ -20,6 +20,4 @@ public class RestControllerV1 {
         return new ResponseEntity<>(cityAndWeatherDTO, HttpStatus.CREATED);
     }
 
-
-
 }

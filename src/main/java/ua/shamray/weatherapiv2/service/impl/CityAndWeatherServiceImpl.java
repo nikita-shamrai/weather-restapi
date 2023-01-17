@@ -6,6 +6,8 @@ import ua.shamray.weatherapiv2.domain.City;
 import ua.shamray.weatherapiv2.domain.Weather;
 import ua.shamray.weatherapiv2.dto.CityAndWeatherDTO;
 import ua.shamray.weatherapiv2.dto.mapper.WeatherMapper;
+import ua.shamray.weatherapiv2.repository.CityRepository;
+import ua.shamray.weatherapiv2.repository.WeatherRepository;
 import ua.shamray.weatherapiv2.service.CityAndWeatherService;
 import ua.shamray.weatherapiv2.service.CityService;
 import ua.shamray.weatherapiv2.service.WeatherService;
@@ -14,21 +16,29 @@ public class CityAndWeatherServiceImpl implements CityAndWeatherService {
     @Autowired
     private CityService cityService;
     @Autowired
+    private CityRepository cityRepository;
+    @Autowired
     private WeatherService weatherService;
+    @Autowired
+    private WeatherRepository weatherRepository;
     @Autowired
     private WeatherMapper weatherMapper;
 
     @Override
     public CityAndWeatherDTO getWeatherForCityByName(String cityName) {
         City city = cityService.getCityByName(cityName);
-        Weather weather = weatherService.getWeatherViaWeatherAPI(city);
-
-
+        Weather weather = weatherService.getWeatherViaWeatherAPIAndSaveToDB(city);
+        updateWeatherListInCity(city, weather);
         CityAndWeatherDTO cityAndWeatherDTO = new CityAndWeatherDTO();
-       // cityAndWeatherDTO.mapThisByCityAndWeather(city, weather);
         weatherMapper.updateDTOWithCity(cityAndWeatherDTO, city);
         weatherMapper.updateDTOWithWeather(cityAndWeatherDTO, weather);
-
         return cityAndWeatherDTO;
     }
+
+    private void updateWeatherListInCity(City city, Weather weather){
+        city.getWeatherList().add(weather);
+        cityRepository.save(city);
+    }
+
+
 }

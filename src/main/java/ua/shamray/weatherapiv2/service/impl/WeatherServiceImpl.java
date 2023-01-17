@@ -8,6 +8,7 @@ import ua.shamray.weatherapiv2.domain.City;
 import ua.shamray.weatherapiv2.domain.Weather;
 import ua.shamray.weatherapiv2.dto.api.WeatherAPIResponseDTO;
 import ua.shamray.weatherapiv2.dto.mapper.WeatherMapper;
+import ua.shamray.weatherapiv2.repository.WeatherRepository;
 import ua.shamray.weatherapiv2.service.api.WeatherAPIService;
 import ua.shamray.weatherapiv2.service.WeatherService;
 
@@ -20,13 +21,15 @@ public class WeatherServiceImpl implements WeatherService {
     private ModelMapper modelMapper;
     @Autowired
     private WeatherMapper weatherMapper;
+    @Autowired
+    private WeatherRepository weatherRepository;
 
     @Override
-    public Weather getWeatherViaWeatherAPI(City city) {
+    public Weather getWeatherViaWeatherAPIAndSaveToDB(City city) {
         WeatherAPIResponseDTO weatherAPIResponseDTO = weatherAPIService.fetchWeatherNowByCoordinates(city.getLat(), city.getLon());
         Weather weather = weatherMapper.weatherAPIResponseDTOtoWeather(weatherAPIResponseDTO);
         weather.setCity(city);
-        System.out.println();
+        weatherRepository.save(weather);
         return weather;
     }
 
