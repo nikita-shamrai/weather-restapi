@@ -3,12 +3,8 @@ package ua.shamray.weatherapiv2.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import ua.shamray.weatherapiv2.domain.Weather;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,6 +16,7 @@ public class CityDTO {
     String name;
     Double lat;
     Double lon;
+    List<WeatherDTO> weatherDTOList;
     public Long getId() {
         return id;
     }
@@ -52,4 +49,11 @@ public class CityDTO {
         this.lon = lon;
     }
 
+    public List<WeatherDTO> getWeatherDTOList() {
+        return weatherDTOList;
+    }
+
+    public void setWeatherDTOList(List<WeatherDTO> weatherDTOList) {
+        this.weatherDTOList = weatherDTOList;
+    }
 }
