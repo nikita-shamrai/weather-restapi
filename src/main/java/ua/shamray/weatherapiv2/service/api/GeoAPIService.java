@@ -7,8 +7,6 @@ import ua.shamray.weatherapiv2.dto.CityDTO;
 
 @Service
 public interface GeoAPIService {
-
     CityDTO createValidCity(String cityName);
-
 
 }

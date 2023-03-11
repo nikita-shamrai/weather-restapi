@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder(toBuilder = true)
 public class Weather {
     @Id
@@ -27,43 +29,4 @@ public class Weather {
     @Column(name = "on_time")
     private LocalDateTime onTime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getWeatherStatus() {
-        return weatherStatus;
-    }
-
-    public void setWeatherStatus(String weatherStatus) {
-        this.weatherStatus = weatherStatus;
-    }
-
-    public Double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public LocalDateTime getOnTime() {
-        return onTime;
-    }
-
-    public void setOnTime(LocalDateTime onTime) {
-        this.onTime = onTime;
-    }
 }

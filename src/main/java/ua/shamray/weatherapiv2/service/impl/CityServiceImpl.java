@@ -1,6 +1,6 @@
 package ua.shamray.weatherapiv2.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.shamray.weatherapiv2.domain.City;
 import ua.shamray.weatherapiv2.dto.mapper.CityAndWeatherMapper;
@@ -11,16 +11,12 @@ import ua.shamray.weatherapiv2.service.api.GeoAPIService;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private GeoAPIService geoAPIService;
-    @Autowired
-    private CityAndWeatherMapper cityAndWeatherMapper;
+    private final CityRepository cityRepository;
+    private final GeoAPIService geoAPIService;
+    private final CityAndWeatherMapper cityAndWeatherMapper;
 
-
-    //Нужен ли тут опшинал или можно просто проверять на НУЛЛ?
     @Override
     public City getCityByName(String cityName) {
         Optional<City> cityFromDB = cityAlreadyExistsInDB(cityName);
@@ -31,9 +27,9 @@ public class CityServiceImpl implements CityService {
         }
         return cityFromDB.get();
     }
-    // @Nullable ?????
+
     private Optional<City> cityAlreadyExistsInDB(String cityName) {
-        return Optional.ofNullable(cityRepository.findCityByName(cityName));
+        return cityRepository.findByName(cityName);
     }
 
 }

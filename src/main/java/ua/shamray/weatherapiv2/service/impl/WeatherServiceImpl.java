@@ -1,26 +1,21 @@
 package ua.shamray.weatherapiv2.service.impl;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import ua.shamray.weatherapiv2.domain.City;
 import ua.shamray.weatherapiv2.domain.Weather;
 import ua.shamray.weatherapiv2.dto.api.WeatherAPIResponseDTO;
 import ua.shamray.weatherapiv2.dto.mapper.CityAndWeatherMapper;
 import ua.shamray.weatherapiv2.repository.WeatherRepository;
-import ua.shamray.weatherapiv2.service.api.WeatherAPIService;
 import ua.shamray.weatherapiv2.service.WeatherService;
+import ua.shamray.weatherapiv2.service.api.WeatherAPIService;
 
 @Service
+@RequiredArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
-
-    @Autowired
-    private WeatherAPIService weatherAPIService;
-    @Autowired
-    private CityAndWeatherMapper cityAndWeatherMapper;
-    @Autowired
-    private WeatherRepository weatherRepository;
+    private final WeatherAPIService weatherAPIService;
+    private final CityAndWeatherMapper cityAndWeatherMapper;
+    private final WeatherRepository weatherRepository;
 
     @Override
     public Weather getWeatherViaWeatherAPIAndSaveToDB(City city) {
@@ -30,15 +25,5 @@ public class WeatherServiceImpl implements WeatherService {
         weatherRepository.save(weather);
         return weather;
     }
-
-    /*@Override
-    public Weather convertWeatherAPIResponseDTOtoWeather(WeatherAPIResponseDTO weatherAPIResponseDTO) {
-        Weather weather = new Weather();
-        System.out.println();
-        modelMapper.map(weatherAPIResponseDTO, weather);
-        System.out.println();
-        return weather;
-    }*/
-
 
 }

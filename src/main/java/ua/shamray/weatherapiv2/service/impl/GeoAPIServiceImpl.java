@@ -1,6 +1,7 @@
 package ua.shamray.weatherapiv2.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,29 +28,14 @@ import java.util.stream.Stream;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 @Service
+@RequiredArgsConstructor
 public class GeoAPIServiceImpl implements GeoAPIService {
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
     private @Value("${openweathermap.API.KEY}") String API_KEY;
     private @Value("${openweathermap.API.GEO.URI}") String API_URI;
 
     @Override
     public CityDTO createValidCity(String cityName) throws NoSuchElementException{
-      /*  try {
-            WebClient.create()
-                    .get()
-                    .uri(coordinatesAPIURIBuilder(cityName))
-                    .retrieve()
-                    .bodyToFlux(CityDTO.class)
-
-
-
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-*/
         HttpClient client = HttpClient.newHttpClient();
         CityDTO cityDTO;
         try {
@@ -74,7 +60,6 @@ public class GeoAPIServiceImpl implements GeoAPIService {
         return cityDTO;
     }
 
-
     private URI coordinatesAPIURIBuilder(String cityName) throws URISyntaxException {
         return UriComponentsBuilder.fromHttpUrl(API_URI)
                 .replaceQueryParam("q", cityName)
@@ -83,6 +68,5 @@ public class GeoAPIServiceImpl implements GeoAPIService {
                 .build()
                 .toUri();
     }
-
 
 }
