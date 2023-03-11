@@ -1,5 +1,6 @@
 package ua.shamray.weatherapiv2.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class CityDTO {
+    @JsonIgnore
     Long id;
     String name;
     Double lat;
