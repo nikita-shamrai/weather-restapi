@@ -1,8 +1,8 @@
 # Weather-RestApi
-This project uses OpenWeather API to receive city coordinates and current weather by city name.
-After receiving the data, it makes a record in database, and you can get the statistics of temperature by city name.
+This project uses **OpenWeather API** to receive city coordinates and current weather by city name.
+After receiving the data, it makes a **record in database**, and you can **get the statistics of temperature by city name**.
 
-In this project I learned how to work with third party API's, how to parse data from JSON to local entities 
+In this project I learned how to **work with third party API's**, how to parse data from JSON to local entities 
 and implemented the DTO pattern. 
 
 ## Steps to Setup
